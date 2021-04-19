@@ -16,9 +16,13 @@ class _AccountDetailsPageState extends State<AccountDetailsPage> {
   late Member _member;
 
   @override
-  Widget build(BuildContext context) {
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     this._member = Member.fromJson(context.currentBeamLocation.state.data);
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
             title: Text('Account Details'), backgroundColor: Colors.teal),

@@ -29,12 +29,7 @@ class _UpdateMemberPageState extends State<UpdateMemberPage> {
         body: BlocConsumer<MemberBloc, MemberState>(
             listener: (context, state) async {
           if (state is UpdatedMemberState) {
-            Beamer.of(context).currentLocation.update(
-                  (beamState) => beamState.copyWith(
-                    pathBlueprintSegments: ['account-details-page'],
-                    data: state.member.toJson(),
-                  ),
-                );
+            Beamer.of(context).beamBack();
           }
         }, builder: (context, state) {
           return Form(
