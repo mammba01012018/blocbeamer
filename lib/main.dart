@@ -6,20 +6,14 @@ import 'beam_locations.dart';
 import 'member_bloc/member_bloc.dart';
 
 void main() {
-  runApp(
-    MultiBlocProvider(
-        providers: [
-          BlocProvider<MemberBloc>(
-            create: (context) =>
-                MemberBloc(),
-          ),
-        ],
-        child: new MyApp()
-    ));
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider<MemberBloc>(
+      create: (context) => MemberBloc(),
+    ),
+  ], child: new MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-
   final routerDelegate = BeamerRouterDelegate(
     locationBuilder: (state) {
       if (state.pathBlueprintSegments.contains('account-details-page')) {
@@ -45,5 +39,4 @@ class MyApp extends StatelessWidget {
           BeamerBackButtonDispatcher(delegate: routerDelegate),
     );
   }
-   
 }

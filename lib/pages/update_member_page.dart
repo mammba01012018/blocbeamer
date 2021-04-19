@@ -13,7 +13,6 @@ class UpdateMemberPage extends StatefulWidget {
 }
 
 class _UpdateMemberPageState extends State<UpdateMemberPage> {
-
   late Member _member;
   final _formKey = GlobalKey<FormState>();
   String? firstName;
@@ -22,18 +21,17 @@ class _UpdateMemberPageState extends State<UpdateMemberPage> {
   @override
   Widget build(BuildContext context) {
     this._member = Member.fromJson(context.currentBeamLocation.state.data);
- 
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Update Member Page'),
-      ),
-      body: BlocConsumer <MemberBloc, MemberState> (
-        listener: (context, state) async {
-          if(state is UpdatedMemberState) {
-            Beamer.of(context).beamBack(); 
+        appBar: AppBar(
+          title: Text('Update Member Page'),
+        ),
+        body: BlocConsumer<MemberBloc, MemberState>(
+            listener: (context, state) async {
+          if (state is UpdatedMemberState) {
+            Beamer.of(context).beamBack();
           }
-        },
-        builder: (context, state) {
+        }, builder: (context, state) {
           return Form(
             key: _formKey,
             child: Column(
@@ -41,44 +39,41 @@ class _UpdateMemberPageState extends State<UpdateMemberPage> {
                 SizedBox(height: 30.0),
                 TextFormField(
                   onSaved: (String? value) {
-                    firstName=value;
+                    firstName = value;
                   },
                   initialValue: _member.firstName,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'FirstName',),
+                    border: OutlineInputBorder(),
+                    labelText: 'FirstName',
+                  ),
                 ),
                 SizedBox(height: 30.0),
                 TextFormField(
                   onSaved: (String? value) {
-                    lastName=value;
+                    lastName = value;
                   },
                   initialValue: _member.lastName,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'LastName',),
-                ),      
+                    border: OutlineInputBorder(),
+                    labelText: 'LastName',
+                  ),
+                ),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
-                      Member updatedMember = new Member(firstName: firstName ?? '', lastName: lastName ?? '');
-                      BlocProvider.of<MemberBloc>(context).add( 
-                        UpdateMember(
-                          member: updatedMember
-                        ),
+                      Member updatedMember = new Member(
+                          firstName: firstName ?? '', lastName: lastName ?? '');
+                      BlocProvider.of<MemberBloc>(context).add(
+                        UpdateMember(member: updatedMember),
                       );
                     }
                   },
                   child: Text('Submit'),
-                ),  
+                ),
               ],
             ),
           );
-        }
-      )
-    );
-  
+        }));
   }
-
 }

@@ -14,7 +14,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-
   Member? _member;
 
   final _scaffoldKey = GlobalKey();
@@ -28,7 +27,7 @@ class _HomeState extends State<Home> {
   setInitialMember() async {
     final _storage = FlutterSecureStorage();
     String? memberString = await _storage.read(key: 'member');
-    if(memberString != null) {
+    if (memberString != null) {
       Map<String, dynamic> map = json.decode(memberString);
       this.setState(() {
         _member = Member.fromJson(map);
@@ -39,35 +38,36 @@ class _HomeState extends State<Home> {
         _storage.write(key: 'member', value: json.encode(_member));
       });
     }
-    
+
     print(_member);
   }
 
-
   @override
   Widget build(BuildContext context) {
-     return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text('Member'),
-      ),
-      drawer: HomeDrawer(),
-      body: Container(
-        child: BlocConsumer <MemberBloc, MemberState> (
-          listener: (context, state) async {
-            if(state is UpdatedMemberState) {
-              this.setState(() {
-                _member = state.member;
-              });
-            }
-          },
-          builder: (context, state) {
-            return Center(
-              child: _member != null ? Text('Current name: ' + _member!.firstName + ' '+ _member!.lastName,   style: TextStyle( fontSize: 30)) : Text('')
-            );
+    return Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          title: Text('Member'),
+        ),
+        drawer: HomeDrawer(),
+        body: Container(
+            child: BlocConsumer<MemberBloc, MemberState>(
+                listener: (context, state) async {
+          if (state is UpdatedMemberState) {
+            this.setState(() {
+              _member = state.member;
+            });
           }
-        )
-      )  
-    );
+        }, builder: (context, state) {
+          return Center(
+              child: _member != null
+                  ? Text(
+                      'Current name: ' +
+                          _member!.firstName +
+                          ' ' +
+                          _member!.lastName,
+                      style: TextStyle(fontSize: 30))
+                  : Text(''));
+        })));
   }
 }

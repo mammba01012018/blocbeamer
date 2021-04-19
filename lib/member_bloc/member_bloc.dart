@@ -5,9 +5,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'bloc.dart';
 
 class MemberBloc extends Bloc<MemberEvent, MemberState> {
-
   MemberBloc() : super(InitialMemberState());
-  
+
   @override
   MemberState get initialState => InitialMemberState();
 
@@ -20,12 +19,11 @@ class MemberBloc extends Bloc<MemberEvent, MemberState> {
 
         final _storage = FlutterSecureStorage();
         _storage.write(key: 'member', value: json.encode(event.member));
-        
+
         yield UpdatedMemberState(member: event.member);
       }
-    } catch(e) {
+    } catch (e) {
       print(e.toString());
     }
   }
-  
 }

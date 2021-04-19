@@ -10,19 +10,17 @@ class HomeLocation extends BeamLocation {
 
   @override
   List<BeamPage> buildPages(BuildContext context, BeamState state) => [
-    BeamPage(
-      key: ValueKey('home'),
-      child: Home(),
-    ),
-  ];
+        BeamPage(
+          key: ValueKey('home'),
+          child: Home(),
+        ),
+      ];
 
   @override
   List<String> get pathBlueprints => ['/'];
 }
 
-
 class AccountDetailsPageLocation extends BeamLocation {
-
   AccountDetailsPageLocation(BeamState state) : super(state);
 
   @override
@@ -30,17 +28,16 @@ class AccountDetailsPageLocation extends BeamLocation {
 
   @override
   List<BeamPage> buildPages(BuildContext context, BeamState state) => [
-    ...HomeLocation(state).buildPages(context, state),
-    if (state.uri.pathSegments.contains('account-details-page'))
-      BeamPage(
-        key: ValueKey('account-details-page'),
-        child: AccountDetailsPage(),
-      ),
-  ];
+        ...HomeLocation(state).buildPages(context, state),
+        if (state.uri.pathSegments.contains('account-details-page'))
+          BeamPage(
+            key: ValueKey('account-details-page'),
+            child: AccountDetailsPage(),
+          ),
+      ];
 }
 
 class UpdateMemberPageLocation extends BeamLocation {
-
   UpdateMemberPageLocation(BeamState state) : super(state);
 
   @override
@@ -48,19 +45,11 @@ class UpdateMemberPageLocation extends BeamLocation {
 
   @override
   List<BeamPage> buildPages(BuildContext context, BeamState state) => [
-    ...HomeLocation(state).buildPages(context, state),
-    if (state.uri.pathSegments.contains('update-member-page'))
-      BeamPage(
-        key: ValueKey('update-member-page'),
-        child: UpdateMemberPage(),
-      ),
-  ];
+        ...HomeLocation(state).buildPages(context, state),
+        if (state.uri.pathSegments.contains('update-member-page'))
+          BeamPage(
+            key: ValueKey('update-member-page'),
+            child: UpdateMemberPage(),
+          ),
+      ];
 }
-
-
-
-
-
-
-
-

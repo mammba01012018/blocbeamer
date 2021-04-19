@@ -1,5 +1,3 @@
-
-
 import 'package:blocbeamer/models/member.dart';
 import 'package:meta/meta.dart';
 

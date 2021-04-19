@@ -15,7 +15,6 @@ class HomeDrawer extends StatefulWidget {
 }
 
 class _HomeDrawerState extends State<HomeDrawer> {
-
   Member? _member;
 
   @override
@@ -29,45 +28,45 @@ class _HomeDrawerState extends State<HomeDrawer> {
     String? memberString = await _storage.read(key: 'member');
     Map<String, dynamic> map = json.decode(memberString!);
     this.setState(() {
-       _member = Member.fromJson(map);
+      _member = Member.fromJson(map);
     });
     print(_member);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(        
-      child:  BlocConsumer <MemberBloc, MemberState> (
-        listener: (context, state) async {
-          if(state is UpdatedMemberState) {
-            this.setState(() {
-              _member = state.member;
-            });
-          }
-        },
-        builder: (context, state) {
-          return  ListView(
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                margin: const EdgeInsets.only(bottom: 0.0, top: 0.0),
-                accountName: _member != null ? Text(_member!.firstName + ' '+ _member!.lastName) : Text(''),
-                accountEmail: new Text('@gmail.com'),
-                currentAccountPicture: new GestureDetector(
-                  child: new CircleAvatar(
-                    backgroundImage: new NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIAVvRR35IC9yiDnGjU5dJJU_wxJLLiXQKpefCQdtoUSF7PCQRTg") 
-                  ),
-                ),
+    return Drawer(
+      child: BlocConsumer<MemberBloc, MemberState>(
+          listener: (context, state) async {
+        if (state is UpdatedMemberState) {
+          this.setState(() {
+            _member = state.member;
+          });
+        }
+      }, builder: (context, state) {
+        return ListView(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              margin: const EdgeInsets.only(bottom: 0.0, top: 0.0),
+              accountName: _member != null
+                  ? Text(_member!.firstName + ' ' + _member!.lastName)
+                  : Text(''),
+              accountEmail: new Text('@gmail.com'),
+              currentAccountPicture: new GestureDetector(
+                child: new CircleAvatar(
+                    backgroundImage: new NetworkImage(
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIAVvRR35IC9yiDnGjU5dJJU_wxJLLiXQKpefCQdtoUSF7PCQRTg")),
               ),
-              ListTile(
+            ),
+            ListTile(
                 title: new Text('Account Details Page'),
                 onTap: () async {
-                    Beamer.of(context).beamToNamed('/account-details-page', data: _member!.toJson(), stacked: true);
-                }
-              ),
-            ],
-          );
-        }
-      ),
-    );  
+                  Beamer.of(context).beamToNamed('/account-details-page',
+                      data: _member!.toJson(), stacked: true);
+                }),
+          ],
+        );
+      }),
+    );
   }
 }
