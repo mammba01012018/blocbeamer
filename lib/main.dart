@@ -19,9 +19,6 @@ class MyApp extends StatelessWidget {
       if (state.pathBlueprintSegments.contains('account-details-page')) {
         return AccountDetailsPageLocation(state);
       }
-      if (state.pathBlueprintSegments.contains('update-member-page')) {
-        return UpdateMemberPageLocation(state);
-      }
       return HomeLocation(state);
     },
   );

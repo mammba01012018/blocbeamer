@@ -74,9 +74,9 @@ class _AccountDetailsPageState extends State<AccountDetailsPage> {
                             ),
                             onPressed: () {
                               Beamer.of(context).beamToNamed(
-                                  'update-member-page',
-                                  data: _member.toJson(),
-                                  stacked: true);
+                                'account-details-page/update',
+                                data: _member.toJson(),
+                              );
                             }),
                       ],
                     ),
