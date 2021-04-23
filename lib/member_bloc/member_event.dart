@@ -9,3 +9,11 @@ class UpdateMember extends MemberEvent {
 
   UpdateMember({required this.member});
 }
+
+
+class ShowFlushBarEvent extends MemberEvent {
+  final String message;
+  final String? type;
+
+  ShowFlushBarEvent({required this.message, this.type});
+}
