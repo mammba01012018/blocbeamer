@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:another_flushbar/flushbar.dart';
 import 'package:blocbeamer/member_bloc/bloc.dart';
 import 'package:blocbeamer/models/member.dart';
 import 'package:blocbeamer/widgets/home_drawer.dart';
@@ -57,6 +58,14 @@ class _HomeState extends State<Home> {
             this.setState(() {
               _member = state.member;
             });
+          }
+          if(state is NotificationFlushBarState ) {
+            Flushbar(
+              title:  state.message,
+              backgroundColor: Colors.blue[300]!,
+              message:  " ",
+              duration:  Duration(seconds: 2),              
+            )..show(context);
           }
         }, builder: (context, state) {
           return Center(

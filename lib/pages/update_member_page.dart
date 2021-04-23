@@ -29,7 +29,10 @@ class _UpdateMemberPageState extends State<UpdateMemberPage> {
         body: BlocConsumer<MemberBloc, MemberState>(
             listener: (context, state) async {
           if (state is UpdatedMemberState) {
-            Beamer.of(context).beamBack();
+            BlocProvider.of<MemberBloc>(context).add( 
+              ShowFlushBarEvent(message: "Member updated")
+            );
+            Beamer.of(context).beamToNamed('/');
           }
         }, builder: (context, state) {
           return Form(
