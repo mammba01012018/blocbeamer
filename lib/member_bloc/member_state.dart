@@ -13,3 +13,10 @@ class UpdatedMemberState extends MemberState {
 
   UpdatedMemberState({required this.member});
 }
+
+class NotificationFlushBarState extends MemberState {
+  final String message;
+  final String? type;
+
+  NotificationFlushBarState({required this.message, this.type});
+}

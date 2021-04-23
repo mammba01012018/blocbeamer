@@ -22,6 +22,10 @@ class MemberBloc extends Bloc<MemberEvent, MemberState> {
 
         yield UpdatedMemberState(member: event.member);
       }
+      else if (event is ShowFlushBarEvent) {
+        yield NotificationFlushBarState(message: event.message);
+        return;
+      }
     } catch (e) {
       print(e.toString());
     }
